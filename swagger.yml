@@ -1,7 +1,7 @@
 swagger: "2.0"
 info:
   description: |
-    This is MyMusic API,a demo for exploring API design best practices in Rails 5.
+    This is MyMusic API,a demo for exploring API design best practices in Rails 5444.
     To be able to try operations you have to obtain a JSON Web Token, fill  in the token field and press the arrow button next to it.
   version: "1.0.0"
   title: MyMusic
