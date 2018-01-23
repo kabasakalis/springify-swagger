@@ -32,10 +32,10 @@
     "application/hal+json"
   ],
   "paths": {
-    "/artists/{artistId}": {
+    "/artists/{artist_id}": {
       "get": {
         "description": "Returns an artist",
-        "summary": "Find User By Id",
+        "summary": "Get One Artist",
         "tags": [
           "Artists"
         ],
@@ -43,7 +43,7 @@
         "parameters": [
           {
             "in": "path",
-            "name": "artistId",
+            "name": "artist_id",
             "description": "ID of artist to fetch, example: 1",
             "required": true,
             "type": "integer",
@@ -130,7 +130,28 @@
           "Genres"
         ],
         "operationId": "getAllGenres",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "exclusiveMaximum": false,
+            "exclusiveMinimum": false,
+            "description": "Page number"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "exclusiveMaximum": false,
+            "exclusiveMinimum": false,
+            "description": "Page size"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful operation"
@@ -173,17 +194,10 @@
             "schema": {
               "$ref": "#/definitions/AddOneGenrerequest"
             }
-          },
-          {
-            "name": "Content-Type",
-            "in": "header",
-            "required": true,
-            "type": "string",
-            "description": ""
           }
         ],
         "responses": {
-          "200": {
+          "201": {
             "description": "Successful operation"
           },
           "400": {
@@ -219,16 +233,9 @@
         "operationId": "getArtistOfAlbum",
         "parameters": [
           {
-            "name": "Content-Type",
-            "in": "header",
-            "required": true,
-            "type": "string",
-            "description": ""
-          },
-          {
             "in": "path",
             "name": "albumId",
-            "description": "The Id of the album",
+            "description": "The id of the album",
             "required": true,
             "type": "integer",
             "format": "int64"
@@ -261,7 +268,7 @@
         ]
       }
     },
-    "/albums/{albumId}": {
+    "/albums/{album_id}": {
       "get": {
         "description": "Returns an album",
         "summary": "Get One Album",
@@ -272,7 +279,7 @@
         "parameters": [
           {
             "in": "path",
-            "name": "albumId",
+            "name": "album_id",
             "description": "The Id of the album",
             "required": true,
             "type": "integer",
@@ -485,7 +492,28 @@
           "Users"
         ],
         "operationId": "getUsers",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "exclusiveMaximum": false,
+            "exclusiveMinimum": false,
+            "description": "Page number"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "exclusiveMaximum": false,
+            "exclusiveMinimum": false,
+            "description": "Size of each page"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful operation"
@@ -566,7 +594,28 @@
           "Playlists"
         ],
         "operationId": "getPlaylists",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "exclusiveMaximum": false,
+            "exclusiveMinimum": false,
+            "description": "Page number"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "exclusiveMaximum": false,
+            "exclusiveMinimum": false,
+            "description": "Size of each page"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful operation"
@@ -609,17 +658,10 @@
             "schema": {
               "$ref": "#/definitions/AddOnePlaylistrequest"
             }
-          },
-          {
-            "name": "Content-Type",
-            "in": "header",
-            "required": true,
-            "type": "string",
-            "description": ""
           }
         ],
         "responses": {
-          "200": {
+          "201": {
             "description": "Successful operation"
           },
           "400": {
@@ -743,7 +785,28 @@
           "Artists"
         ],
         "operationId": "getArtists",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "exclusiveMaximum": false,
+            "exclusiveMinimum": false,
+            "description": "Page number"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "exclusiveMaximum": false,
+            "exclusiveMinimum": false,
+            "description": "Size of each page"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful operation"
@@ -832,7 +895,7 @@
             "format": "int32",
             "exclusiveMaximum": false,
             "exclusiveMinimum": false,
-            "description": ""
+            "description": "Page number"
           },
           {
             "name": "size",
@@ -842,7 +905,7 @@
             "format": "int32",
             "exclusiveMaximum": false,
             "exclusiveMinimum": false,
-            "description": ""
+            "description": "Size of each page"
           }
         ],
         "responses": {
@@ -925,6 +988,14 @@
         ],
         "operationId": "updateAlbum",
         "parameters": [
+          {
+            "in": "path",
+            "name": "albumId",
+            "description": "The id of the album",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
           {
             "name": "Body",
             "in": "body",
@@ -1017,9 +1088,17 @@
         "operationId": "getAlbumPlaylists",
         "parameters": [
           {
+            "in": "path",
+            "name": "albumId",
+            "description": "The id of the album",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
             "name": "page",
             "in": "query",
-            "required": true,
+            "required": false,
             "type": "integer",
             "format": "int32",
             "exclusiveMaximum": false,
@@ -1029,7 +1108,7 @@
           {
             "name": "size",
             "in": "query",
-            "required": true,
+            "required": false,
             "type": "integer",
             "format": "int32",
             "exclusiveMaximum": false,
@@ -1071,6 +1150,12 @@
         "tags": [
           "Albums"
         ],
+        "consumes": [
+          "text/uri-list"
+        ],
+        "produces": [
+          "application/hal+json"
+        ],
         "operationId": "addAlbumPlaylists",
         "parameters": [
           {
@@ -1080,6 +1165,15 @@
             "required": true,
             "type": "integer",
             "format": "int64"
+          },
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "playlist list",
+            "schema": {
+              "$ref": "#/definitions/PlaylistUriList"
+            }
           }
         ],
         "responses": {
@@ -1120,7 +1214,7 @@
         "parameters": [
           {
             "in": "path",
-            "name": "albulmId",
+            "name": "albumId",
             "description": "Id of Album",
             "required": true,
             "type": "integer",
@@ -1173,7 +1267,7 @@
         "parameters": [
           {
             "in": "path",
-            "name": "genreId",
+            "name": "genre_id",
             "description": "Id of Genre",
             "required": true,
             "type": "integer",
@@ -1214,6 +1308,14 @@
         ],
         "operationId": "updateGenre",
         "parameters": [
+          {
+            "in": "path",
+            "name": "genre_id",
+            "description": "Id of Genre",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
           {
             "name": "Body",
             "in": "body",
@@ -1304,30 +1406,28 @@
         ]
       }
     },
-    "/genres/{genreId}/artists": {
+    "/genres/{genre_id}/artists": {
       "put": {
         "description": "Add artists to this genre",
         "summary": "Add Artists to Genre",
         "tags": [
           "Genres"
         ],
+        "consumes": [
+          "text/uri-list"
+        ],
+        "produces": [
+          "application/hal+json"
+        ],
         "operationId": "addArtistsToGenre",
         "parameters": [
           {
             "in": "path",
-            "name": "genreId",
+            "name": "genre_id",
             "description": "id of genre",
             "required": true,
             "type": "integer",
             "format": "int64"
-          },
-          {
-            "in": "header",
-            "name": "Content-Type",
-            "description": "Content Type",
-            "required": true,
-            "type": "string",
-            "default": "text/uri-list"
           },
           {
             "name": "Body",
@@ -1366,7 +1466,7 @@
         ]
       }
     },
-    "/api/genres/{genreId}/artists": {
+    "/genres/{genreId}/artists": {
       "get": {
         "description": "Get all artists of this genre with pagination",
         "summary": "Get Genre Artists",
@@ -1376,9 +1476,17 @@
         "operationId": "getGenreArtists",
         "parameters": [
           {
+            "in": "path",
+            "name": "genreId",
+            "description": "id of genre",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
             "name": "page",
             "in": "query",
-            "required": true,
+            "required": false,
             "type": "integer",
             "format": "int32",
             "exclusiveMaximum": false,
@@ -1388,7 +1496,7 @@
           {
             "name": "size",
             "in": "query",
-            "required": true,
+            "required": false,
             "type": "integer",
             "format": "int32",
             "exclusiveMaximum": false,
@@ -1423,7 +1531,7 @@
         ]
       }
     },
-    "/api/artists/{artistId}": {
+    "/artists/{artistId}": {
       "delete": {
         "description": "Delete an artist",
         "summary": "Delete Artist",
@@ -1475,6 +1583,14 @@
         ],
         "operationId": "updateArtist",
         "parameters": [
+          {
+            "in": "path",
+            "name": "artistId",
+            "description": "id of artist",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
           {
             "name": "Body",
             "in": "body",
@@ -1602,10 +1718,16 @@
     },
     "/artists/{artist_id}/albums": {
       "put": {
-        "description": "Add almuns to this artist",
+        "description": "Add albums to this artist",
         "summary": "Add Albums to Artist",
         "tags": [
           "Artists"
+        ],
+        "consumes": [
+          "text/uri-list"
+        ],
+        "produces": [
+          "application/hal+json"
         ],
         "operationId": "addAlbumsToArtist",
         "parameters": [
@@ -1616,14 +1738,6 @@
             "required": true,
             "type": "integer",
             "format": "int64"
-          },
-          {
-            "in": "header",
-            "name": "Content-Type",
-            "description": "Content Type",
-            "required": true,
-            "type": "string",
-            "default": "text/uri-list"
           },
           {
             "name": "Body",
@@ -1725,6 +1839,14 @@
         "operationId": "updatePlaylist",
         "parameters": [
           {
+            "in": "path",
+            "name": "playlist_id",
+            "description": "playlist id to delete",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
             "name": "Body",
             "in": "body",
             "required": true,
@@ -1732,14 +1854,6 @@
             "schema": {
               "$ref": "#/definitions/UpdateOnePlaylistrequest"
             }
-          },
-          {
-            "in": "path",
-            "name": "playlist_id",
-            "description": "playlist id to delete",
-            "required": true,
-            "type": "integer",
-            "format": "int64"
           }
         ],
         "responses": {
@@ -1824,9 +1938,17 @@
         "operationId": "getPlaylistAlbums",
         "parameters": [
           {
+            "in": "path",
+            "name": "playlistId",
+            "description": "playlist id to get albums for",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
             "name": "page",
             "in": "query",
-            "required": true,
+            "required": false,
             "type": "integer",
             "format": "int32",
             "exclusiveMaximum": false,
@@ -1836,7 +1958,7 @@
           {
             "name": "size",
             "in": "query",
-            "required": true,
+            "required": false,
             "type": "integer",
             "format": "int32",
             "exclusiveMaximum": false,
@@ -1878,10 +2000,13 @@
         "tags": [
           "Playlists"
         ],
-        "operationId": "addAlbumsToPlaylist",
-        "produces": [
-          "application/json"
+        "consumes": [
+          "text/uri-list"
         ],
+        "produces": [
+          "application/hal+json"
+        ],
+        "operationId": "addAlbumsToPlaylist",
         "parameters": [
           {
             "in": "path",
@@ -1890,14 +2015,6 @@
             "required": true,
             "type": "integer",
             "format": "int64"
-          },
-          {
-            "in": "header",
-            "name": "Content-Type",
-            "description": "Content Type",
-            "required": true,
-            "type": "string",
-            "default": "text/uri-list"
           },
           {
             "name": "Body",
@@ -1936,7 +2053,7 @@
         ]
       }
     },
-    "/api/playlists/{playlistId}/albums/{albumId}": {
+    "/playlists/{playlistId}/albums/{albumId}": {
       "delete": {
         "description": "Remove album from playlist, without deleting the album",
         "summary": "Remove playlist album association",
@@ -1997,7 +2114,28 @@
           "Roles"
         ],
         "operationId": "GetRoles",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "exclusiveMaximum": false,
+            "exclusiveMinimum": false,
+            "description": "Page number"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "exclusiveMaximum": false,
+            "exclusiveMinimum": false,
+            "description": "Size of each page"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful operation"
@@ -2070,11 +2208,12 @@
         ]
       }
     },
-    "/api/login": {
+    "/login": {
       "post": {
         "description": "",
         "summary": "Login",
         "tags": [
+          "Root"
         ],
         "operationId": "login",
         "parameters": [
@@ -2120,6 +2259,7 @@
         "description": "Create a new user with defaut USER role",
         "summary": "Sign Up",
         "tags": [
+          "Root"
         ],
         "operationId": "signUp",
         "parameters": [
@@ -2165,13 +2305,13 @@
     "UpdateOnePlaylistrequest": {
       "title": "Update One PlaylistRequest",
       "example": {
-        "name": "Top Bulgaria"
+        "name": "Top UK"
       },
       "type": "object",
       "properties": {
         "name": {
           "description": "",
-          "example": "Top Bulgaria",
+          "example": "Top UK",
           "type": "string"
         }
       },
@@ -2188,12 +2328,12 @@
       "type": "object",
       "properties": {
         "username": {
-          "description": "",
-          "example": "admin",
+          "description": "The username",
+          "example": "peter",
           "type": "string"
         },
         "password": {
-          "description": "",
+          "description": "The password",
           "example": "11111111",
           "type": "string"
         }
@@ -2214,22 +2354,22 @@
       "type": "object",
       "properties": {
         "username": {
-          "description": "",
+          "description": "The username",
           "example": "admin2",
           "type": "string"
         },
         "password": {
-          "description": "",
+          "description": "The password",
           "example": "11111111",
           "type": "string"
         },
         "passwordConfirm": {
-          "description": "",
+          "description": "Password Confirmation",
           "example": "11111111",
           "type": "string"
         },
         "email": {
-          "description": "",
+          "description": "Email",
           "example": "admin2@gmail.com",
           "type": "string"
         }
@@ -2244,18 +2384,18 @@
     "UpdateOneAlbumrequest": {
       "title": "Update One AlbumRequest",
       "example": {
-        "title": "Rockstar_Updated",
+        "title": "Updated",
         "year": "2020"
       },
       "type": "object",
       "properties": {
         "title": {
-          "description": "",
-          "example": "Rockstar_Updated",
+          "description": "Title of Album",
+          "example": "Updated",
           "type": "string"
         },
         "year": {
-          "description": "",
+          "description": "Year",
           "example": "2020",
           "type": "string"
         }
@@ -2273,7 +2413,7 @@
       "type": "object",
       "properties": {
         "name": {
-          "description": "",
+          "description": "Name of Genre",
           "example": "PsyTrance",
           "type": "string"
         }
@@ -2285,13 +2425,13 @@
     "UpdateOneGenrerequest": {
       "title": "Update One GenreRequest",
       "example": {
-        "name": "PsyTrance KOKO"
+        "name": "PsyTrance Updated"
       },
       "type": "object",
       "properties": {
         "name": {
-          "description": "",
-          "example": "PsyTrance KOKO",
+          "description": "Name of Genre",
+          "example": "PsyTrance Updated",
           "type": "string"
         }
       },
@@ -2308,12 +2448,12 @@
       "type": "object",
       "properties": {
         "name": {
-          "description": "",
+          "description": "Name of Artist",
           "example": "Vio-lence",
           "type": "string"
         },
         "country": {
-          "description": "",
+          "description": "Country of Artist",
           "example": "USA",
           "type": "string"
         }
@@ -2326,19 +2466,19 @@
     "UpdateArtistrequest": {
       "title": "Update ArtistRequest",
       "example": {
-        "name": "Vio-lence _____",
-        "country": "USA _____"
+        "name": "Updated Artist",
+        "country": "Updated Country"
       },
       "type": "object",
       "properties": {
         "name": {
           "description": "",
-          "example": "Vio-lence _____",
+          "example": "Updated Artist",
           "type": "string"
         },
         "country": {
           "description": "",
-          "example": "USA _____",
+          "example": "Updated Country",
           "type": "string"
         }
       },
@@ -2350,13 +2490,13 @@
     "AddOnePlaylistrequest": {
       "title": "Add One PlaylistRequest",
       "example": {
-        "name": "Top Albania"
+        "name": "Top Malta"
       },
       "type": "object",
       "properties": {
         "name": {
-          "description": "",
-          "example": "Top Albania",
+          "description": "Name of Playlist",
+          "example": "Top Malta",
           "type": "string"
         }
       },
@@ -2373,12 +2513,12 @@
       "type": "object",
       "properties": {
         "title": {
-          "description": "",
+          "description": "Title of Album",
           "example": "Rockstar",
           "type": "string"
         },
         "year": {
-          "description": "",
+          "description": "Year of Album",
           "example": "2017",
           "type": "string"
         }
@@ -2387,6 +2527,21 @@
         "title",
         "year"
       ]
+    },
+    "ArtistUriList": {
+      "title": "Artist Uri list",
+      "type": "string",
+      "example": "/artists/1 \n /artists/2"
+    },
+    "AlbumUriList": {
+      "title": "Album Uri list",
+      "type": "string",
+      "example": "/albums/1 \n /albums/2"
+    },
+    "PlaylistUriList": {
+      "title": "Playlist Uri list",
+      "type": "string",
+      "example": "/playlist/1 \n /playlist/2"
     }
   }
 }
